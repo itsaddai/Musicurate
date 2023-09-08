@@ -1,9 +1,16 @@
-import React, { useState } from 'react';
+import { useState } from "react";
+import { Button, TextField } from "@mui/material";
 import { Link, useNavigate } from 'react-router-dom';
 import './register.css';
 import axios from 'axios';
+import React from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 const Register = () => {
+
   const history = useNavigate();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -11,135 +18,118 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-
   const handleSubmit = async (event) => {
-    event.preventDefault();
-    // Add your registration logic here
+  event.preventDefault();
 
-    const registrationData = {
-      firstName,
-      lastName,
-      email,
-      password,
-      confirmPassword
-    };
-    const strongPasswordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
-    const emailFormatPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    
-    
-    if (password !== confirmPassword) {
-      alert("Passwords do not match");
-      return;
-    }
-    if(!firstName || !lastName || !email || !password || !confirmPassword) {
-      alert("Please fill out all fields");
-      return;
-    }
-    if (!strongPasswordPattern.test(password)) {
-      alert("Please choose a stronger password. Try a mix of letters, numbers, and symbols.");
-      return;
-    }
-    if (!emailFormatPattern.test(email)) {
-      alert("Please enter a valid email address.");
-      return;
-    }
-    if (password.length < 8) {
-      alert("Password must be at least 8 characters");
-      return;
-    }
-    if (firstName.length < 2) {
-      alert("Are you sure you entered your first name correctly?");
-      return;
-    }
-    if (lastName.length < 2) {
-      alert("Are you sure you entered your first name correctly?");
-      return;
-    }
-    axios.post('http://localhost:4000/app/register', registrationData)
-    .then(res => {
-      console.log(res.data);
-      if(res.data === "Email already exists") {
-        alert("Email already exists");
-        return;
-      }
-      else{
-        //redirect to home if successful
-        history('/');
-      }
-    })
-    .catch(err => {
-      console.log(err);
-    });
-    
-    
+  // Create an object with the user's input data
+  const registrationData = {
+    firstName,
+    lastName,
+    email,
+    password,
+    confirmPassword
   };
 
-  
-  
+  if (!firstName || !lastName || !email || !password || !confirmPassword) {
+    toast.error("Please fill out all fields");
+    return;
+  }
+
+  if (password !== confirmPassword) {
+    toast.error("Passwords do not match");
+    return;
+  }
+
+  const emailFormatPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailFormatPattern.test(email)) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
+  if (password.length < 7 || !/[0-9]/.test(password) || !/[!@#$%^&*]/.test(password)) {
+    toast.error("Password must be at least 7 characters and contain at least 1 number and 1 symbol");
+    return;
+  }
+
+  // If the input data is valid, proceed with the API call
+  axios.post('http://localhost:4000/app/register', registrationData)
+    .then((res) => {
+      console.log(res.data);
+      if (res.data === "Email already exists") {
+        toast.error("Email already exists");
+    return;
+      } else {
+
+        toast.success("Registration successful");
+        // Redirect to home if successful
+        history('/dashboard');
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      toast.error("Email already exists")
+    });
+};
 
   return (
-    <div className="register-container">
-      <h2>Register</h2>
-      <form onSubmit={handleSubmit} noValidate>
-        <div>
-          <label>First Name:</label>
-          <input
-            type="text"
-            value={firstName}
+    <form
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        maxWidth: "300px",
+        margin: "auto",
+      }}
+    >
+      <h1>Register</h1>
+      <TextField
+        label="First Name"
+        variant="outlined"
+        name="firstName"
+        value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
-            required
-            placeholder='First Name'
-          />
-        </div>
-        <div>
-          <label>Last Name:</label>
-          <input
-            type="text"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-            required
-            placeholder='Last Name'
-          />
-        </div>
-        <div>
-          <label>Email:</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-            placeholder='Email'
-          />
-          
-        </div>
-        <div>
-          <label>Password:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            autoComplete='new-password'
-            placeholder='Password'
-          />
-        </div>
-        <div>
-          <label>Confirm Password:</label>
-          <input
-            type="password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-            autoComplete='new-password'
-            placeholder='Confirm Password'
-          />
-          
-        </div>
-        <button type="submit">Register</button>
-      </form>
-      <p>Already have an account? Log in<Link to="/login"> here</Link></p>
-    </div>
+        style={{ marginBottom: "1rem" }}
+      />
+      <TextField
+        label="Last Name"
+        variant="outlined"
+        name="lastName"
+        value={lastName}
+        onChange={(e) => setLastName(e.target.value)}
+        style={{ marginBottom: "1rem" }}
+      />
+      <TextField
+        label="Email"
+        type="email"
+        variant="outlined"
+        name="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        style={{ marginBottom: "1rem" }}
+      />
+      <TextField
+        label="Password"
+        type="password"
+        variant="outlined"
+        name="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        style={{ marginBottom: "1rem" }}
+      />
+      <TextField
+        label="Confirm Password"
+        type="password"
+        variant="outlined"
+        name="confirmPassword"
+        value={confirmPassword}
+        onChange={(e) => setConfirmPassword(e.target.value)}
+        style={{ marginBottom: "1rem" }}
+      />
+      <Button variant="contained" color="primary" onClick={handleSubmit}>
+        Register
+      </Button>
+      <p>
+        Already have an account? <Link to="/login">Login</Link>
+      </p>
+    </form>
   );
 };
 
