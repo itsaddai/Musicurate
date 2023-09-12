@@ -27,6 +27,15 @@ Follow these steps to set up a local instance of Musicurate:
 
 1. **Clone the Repository**:
 
-   ```bash
+   ```
    git clone https://github.com/your-username/musicurate.git
    cd musicurate
+
+2. **Install Dependencies**:
+   ```
+   cd client
+   npm i
+   cd ../server
+   npm i
+
+   
