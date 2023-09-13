@@ -1,40 +1,23 @@
 const express = require('express');
 const router = express.Router();
+const { Signup, Login } = require("../Controllers/AuthController");
 const signupTemplateCopy = require('../models/SignupModels');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken'); 
+//import user
+const User = require('../models/SignupModels');
+const { userVerification } = require('../Middlewares/AuthMiddleware');
 
 
-router.post('/register', async (req, res) => {
+//create jwt authentication
+//user verification post
+router.post('/', userVerification)
 
-  const { firstName, lastName, email, password, confirmPassword } = req.body;
-    //check for duplicate emails in database
-    const existingUser = await signupTemplateCopy.findOne({ email: email });
-    if (existingUser) {
-        return res.status(400).json({
-          msg: `Email address already in use. <a href="/login">Login</a>`,
-        });
-      }
-    const saltPassword = await bcrypt.genSaltSync(13);
-    const securePassword = await bcrypt.hash(req.body.password, saltPassword);
+//login post
+router.post('/login', Login);
+//register post
 
+router.post("/register", Signup);
 
-    const signedUpUser = new signupTemplateCopy({
-        
-        firstName:req.body.firstName,
-        lastName:req.body.lastName,
-        email:req.body.email,
-        password:securePassword,
-        confirmPassword:securePassword
-      
-})
-
-signedUpUser.save()
-.then(data => {
-    res.json(data)
-})
-.catch(error => {
-    res.json(error)
-})
-})
 
 module.exports = router

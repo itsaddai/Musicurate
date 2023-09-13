@@ -1,4 +1,6 @@
 const mongoose = require('mongoose')
+const Schema = mongoose.Schema;
+const bcrypt = require('bcryptjs');
 
 const signupSchema = new mongoose.Schema({
     firstName: {
@@ -27,8 +29,7 @@ const signupSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
+});
+   
 
-
-})
-
-module.exports = mongoose.model('register', signupSchema)
+module.exports = User = mongoose.model('register', signupSchema);

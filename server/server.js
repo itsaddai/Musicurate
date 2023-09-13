@@ -7,7 +7,7 @@ const dotenv = require('dotenv')
 
 dotenv.config()
 mongoose.set("strictQuery", false);
-mongoose.connect(process.env.DATABASE_ACCESS, () => console.log("MongoDB is connected!"))
+mongoose.connect(process.env.DATABASE_ACCESS, () => console.log("MongoDB is connected."))
 
 app.use(express.json())
 app.use(cors())
