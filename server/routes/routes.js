@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { Signup, Login } = require("../Controllers/AuthController");
+const { Signup, Login, register } = require("../Controllers/AuthController");
 const signupTemplateCopy = require('../models/SignupModels');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken'); 
@@ -17,7 +17,7 @@ router.post('/', userVerification)
 router.post('/login', Login);
 //register post
 
-router.post("/register", Signup);
+router.post("/register", register);
 
 
 module.exports = router

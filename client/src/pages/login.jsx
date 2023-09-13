@@ -2,44 +2,41 @@ import React, { useState } from 'react';
 import { Button, TextField } from "@mui/material";
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
   const history = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  
+
   const handleSubmit = async (event) => {
     event.preventDefault();
+    
 
     const loginData = {
       email,
       password,
     };
-    const Validator = require("validator");
-const isEmpty = require("is-empty");
-module.exports = function validateLoginInput(data) {
-  let errors = {};
-// Convert empty fields to an empty string so we can use validator functions
-  data.email = !isEmpty(data.email) ? data.email : "";
-  data.password = !isEmpty(data.password) ? data.password : "";
-// Email checks
-  if (Validator.isEmpty(data.email)) {
-    errors.email = "Email field is required";
-  } else if (!Validator.isEmail(data.email)) {
-    errors.email = "Email is invalid";
-  }
-// Password checks
-  if (Validator.isEmpty(data.password)) {
-    errors.password = "Password field is required";
-  }
-return {
-    errors,
-    isValid: isEmpty(errors)
-  };
-};
-
+    if(!email || !password) {
+      toast.error("Please fill out all fields");
+      return;
+    }
+    const emailFormatPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailFormatPattern.test(email)) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
+    if (password.length < 7 || !/[0-9]/.test(password) || !/[!@#$%^&*]/.test(password)) {
+      toast.error("Incorrect Password");
+      return;
+    }
     axios.post("http://localhost:4000/app/login", loginData)
     .then((res) => {
+      toast.success("Login successful");
+      
       console.log(res.data);
       localStorage.setItem("token", res.data.token);
       history("/dashboard");
@@ -48,6 +45,7 @@ return {
       console.log(err);
     });
   };
+  
   
 
   return (

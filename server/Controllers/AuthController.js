@@ -2,26 +2,39 @@ const User = require("../models/SignupModels");
 const { createSecretToken } = require("../util/SecretToken");
 const bcrypt = require("bcryptjs");
 
-module.exports.Signup = async (req, res, next) => {
+const register = async (req, res) => {
+  const { firstName, lastName, email, password, confirmPassword } = req.body;
+
   try {
-    const { email, password, username, createdAt } = req.body;
+    // Check if the user already exists
     const existingUser = await User.findOne({ email });
+
     if (existingUser) {
-      return res.json({ message: "User already exists" });
+      return res.status(400).json({ msg: "Email already exists" });
     }
-    const user = await User.create({ email, password, username, createdAt });
-    const token = createSecretToken(user._id);
-    res.cookie("token", token, {
-      withCredentials: true,
-      httpOnly: false,
+
+    // Create a new user document with the provided data
+    const newUser = new User({
+      firstName,
+      lastName,
+      email,
+      password,
+      confirmPassword,
     });
-    res
-      .status(201)
-      .json({ message: "User signed in successfully", success: true, user });
-    next();
-  } catch (error) {
-    console.error(error);
+
+    // Save the user to the database
+    await newUser.save();
+
+    // Send a success response
+    res.json({ msg: "Registration successful" });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
   }
+};
+
+module.exports = {
+  register,
 };
 
 module.exports.Login = async (req, res, next) => {
