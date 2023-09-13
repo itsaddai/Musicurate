@@ -1,11 +1,9 @@
-POST http://localhost:4000/app/register
+POST http://localhost:4000/app/login
 Content-Type: application/json
 
 {
-    "firstName": "Isaaac",
-    "lastName": "Newtaon",
-    "email": "isaac22newton@gmail.com",
+    "email": "kee2gster465@gmail.com",
     "password": "Indubitably58!",
-    "confirmPassword": "Indubitably58!"
+
 
 }
