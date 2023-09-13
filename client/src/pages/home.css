@@ -1,0 +1,57 @@
+.home-container {
+    background: #f6f6f6;
+    text-align: center;
+    padding: 80px 0;
+  }
+  
+  .header {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #ffffff;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  
+  h1 {
+    font-size: 36px;
+    color: #333;
+    margin-bottom: 16px;
+  }
+  
+  p {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 40px;
+  }
+  
+  .cta-buttons {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .start-button,
+  .login-button {
+    text-decoration: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+    font-size: 18px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .start-button {
+    background: #4caf50;
+    color: #fff;
+  }
+  
+  .login-button {
+    background: #2196f3;
+    color: #fff;
+  }
+  
+  .start-button:hover,
+  .login-button:hover {
+    opacity: 0.9;
+  }

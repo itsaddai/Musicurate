@@ -4,7 +4,7 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 //import contexts
 import { UserProvider } from "./contexts/user.context";
-import {createRoot} from 'react-dom';
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
