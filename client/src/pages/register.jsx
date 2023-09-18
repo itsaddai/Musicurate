@@ -51,7 +51,7 @@ const Register = () => {
   }
 
   // If the input data is valid, proceed with the API call
-  axios.post('http://localhost:4000/app/register', registrationData)
+  axios.post('http://localhost:4000/app/register', registrationData, { withCredentials: true })
     .then((res) => {
       console.log(res.data);
       if (res.data === "Email already exists") {
