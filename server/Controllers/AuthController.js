@@ -6,6 +6,8 @@ const register = async (req, res) => {
   const { firstName, lastName, email, password, confirmPassword } = req.body;
 
   try {
+    const saltRounds = 10; 
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
     // Check if the user already exists
     const existingUser = await User.findOne({ email });
 
@@ -18,8 +20,8 @@ const register = async (req, res) => {
       firstName,
       lastName,
       email,
-      password,
-      confirmPassword,
+      password: hashedPassword,
+      confirmPassword: hashedPassword,
     });
 
     // Save the user to the database

@@ -1,19 +1,49 @@
-import './dashboard.css'; // Import the CSS file for styling
-import React from 'react';
-//
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 
-const Dashboard = () => {
+const Home = () => {
+  const navigate = useNavigate();
+  const [cookies, removeCookie] = useCookies([]);
+  const [firstName, setFirstName] = useState("");
+  useEffect(() => {
+    const verifyCookie = async () => {
+      if (!cookies.token) {
+        navigate("/login");
+      }
+      const { data } = await axios.post(
+        "http://localhost:4000",
+        {},
+        { withCredentials: true }
+      );
+      const { status, user } = data;
+      setFirstName(user);
+      return status
+        ? toast(`Hello ${user}`, {
+            position: "top-right",
+          })
+        : (removeCookie("token"), navigate("/login"));
+    };
+    verifyCookie();
+  }, [cookies, navigate, removeCookie]);
+  const Logout = () => {
+    removeCookie("token");
+    navigate("/register");
+  };
   return (
-    <div className="dashboard-container">
-      <header>
-        <h1>Welcome to Your Dashboard</h1>
-        <button className="upload-button">Upload</button>
-      </header>
-      <div className="upload-ui">
-        {/* Include the UI for platform selection and upload preparation here */}
+    <>
+      <div className="home_page">
+        <h4>
+          {" "}
+          Welcome <span>{firstName}</span>
+        </h4>
+        <button onClick={Logout}>LOGOUT</button>
       </div>
-    </div>
+      <ToastContainer />
+    </>
   );
 };
 
-export default Dashboard;
+export default Home;
