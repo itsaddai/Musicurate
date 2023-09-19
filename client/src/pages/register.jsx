@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button, TextField } from "@mui/material";
 import { Link, useNavigate } from 'react-router-dom';
@@ -51,7 +52,7 @@ const Register = () => {
   }
 
   // If the input data is valid, proceed with the API call
-  axios.post('http://localhost:4000/app/register', registrationData, { withCredentials: true })
+  axios.post('http://localhost:4000/register', registrationData, { withCredentials: true })
     .then((res) => {
       console.log(res.data);
       if (res.data === "Email already exists") {

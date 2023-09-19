@@ -30,7 +30,7 @@ const Home = () => {
   }, [cookies, navigate, removeCookie]);
   const Logout = () => {
     removeCookie("token");
-    navigate("/register");
+    navigate("/");
   };
   return (
     <>

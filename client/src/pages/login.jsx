@@ -33,7 +33,7 @@ const Login = () => {
       toast.error("Incorrect Password");
       return;
     }
-    axios.post("http://localhost:4000/app/login", loginData)
+    axios.post("http://localhost:4000/login", loginData, { withCredentials: true })
     .then((res) => {
       toast.success("Login successful");
       

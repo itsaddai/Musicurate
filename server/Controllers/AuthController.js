@@ -2,6 +2,7 @@ const User = require("../models/SignupModels");
 const { createSecretToken } = require("../util/SecretToken");
 const bcrypt = require("bcryptjs");
 
+
 const register = async (req, res) => {
   const { firstName, lastName, email, password, confirmPassword } = req.body;
 
@@ -47,9 +48,9 @@ module.exports.Login = async (req, res, next) => {
       }
       const user = await User.findOne({ email });
       if(!user){
-        return res.json({message:'Incorrect password or email' }) 
+        return res.json({message:'Email not found',  }) 
       }
-      const auth = await bcrypt.compare(password,user.password)
+      const auth = await bcrypt.compare(password, user.password)
       if (!auth) {
         return res.json({message:'Incorrect password or email' }) 
       }
@@ -60,6 +61,8 @@ module.exports.Login = async (req, res, next) => {
        });
        res.status(201).json({ message: "User logged in successfully", success: true });
        next()
+       
+
     } catch (error) {
       console.error(error);
     }
