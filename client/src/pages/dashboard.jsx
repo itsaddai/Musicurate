@@ -3,11 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import './dashboard.css'
 
 const Home = () => {
   const navigate = useNavigate();
   const [cookies, removeCookie] = useCookies([]);
   const [firstName, setFirstName] = useState("");
+  
+
   useEffect(() => {
     const verifyCookie = async () => {
       if (!cookies.token) {
@@ -18,6 +21,8 @@ const Home = () => {
         {},
         { withCredentials: true }
       );
+      //if user is logged in hide login and register buttons
+      
       const { status, user } = data;
       setFirstName(user);
       return status
@@ -31,6 +36,7 @@ const Home = () => {
   const Logout = () => {
     removeCookie("token");
     navigate("/");
+    
   };
   return (
     <>
@@ -39,11 +45,13 @@ const Home = () => {
           {" "}
           Welcome <span>{firstName}</span>
         </h4>
-        <button onClick={Logout}>LOGOUT</button>
+        <button className="search" onClick={() => navigate("/search")}>SEARCH</button>
+        <button className="logout" onClick={Logout}>LOGOUT</button>
       </div>
       <ToastContainer />
     </>
   );
+
 };
 
 export default Home;

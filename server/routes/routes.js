@@ -12,7 +12,6 @@ router.post('/login', Login);
 //register post
 router.post("/register", register);
 
-router.get('/dashboard', userVerification)
 
 
 module.exports = router

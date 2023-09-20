@@ -7,7 +7,7 @@ const Home = () => {
     <div className="home-container">
       <header className="header">
         <h1>Welcome to Musicurate</h1>
-        <p>“Hard work beats talent when talent doesn't work hard.” ―Tim Notke.</p>
+        <p>Seamlessly discover new music.</p>
         <div className="cta-buttons">
           <Link to="/register" className="start-button">
             Start Now &gt;
