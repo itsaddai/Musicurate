@@ -8,7 +8,6 @@ Musicurate is a web application that lets music enthusiasts discover new songs a
 - **Playlist Creation**: Build playlists directly from your search results.
 - **User Authentication**: Secure user registration and login system to personalize your music discovery experience.
 - **User Profile**: Customize your profile and see your saved tracks and playlists.
-- 
 
 ## Tech Stack
 
