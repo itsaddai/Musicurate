@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const {register, Login} = require('../Controllers/AuthController')
-const { userVerification } = require('../Middlewares/AuthMiddleware');
+const {register, Login, savePassword} = require('../Controllers/AuthController')
+const { userVerification } = require('../Controllers/Middlewares/AuthMiddleware');
 
 
 //create jwt authentication
@@ -11,6 +11,8 @@ router.post('/', userVerification)
 router.post('/login', Login);
 //register post
 router.post("/register", register);
+//save password post
+//router.post("/save-password", savePassword);
 
 
 

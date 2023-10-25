@@ -10,7 +10,7 @@ const Home = () => {
         <p>Seamlessly discover new music.</p>
         <div className="cta-buttons">
           <Link to="/register" className="start-button">
-            Start Now &gt;
+            Register
           </Link>
           <Link to="/login" className="login-button">
             Login

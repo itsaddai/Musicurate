@@ -28,7 +28,21 @@ const signupSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
+    savedPasswords: {
+        type: Array, 
+        default: [],
+    }
 });
    
-
-module.exports = User = mongoose.model('register', signupSchema);
+const passSchema = new mongoose.Schema({
+    name: String,
+    password: String,
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'register',
+    },
+}
+);
+const User = mongoose.model('register', signupSchema);
+const Pass = mongoose.model('password', passSchema);
+module.exports = { User, Pass };

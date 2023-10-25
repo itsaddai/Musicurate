@@ -5,12 +5,13 @@ import { useCookies } from "react-cookie";
 const AuthRouteGuard = ({ element }) => {
     // Check if user is logged in
       const [cookies] = useCookies([]);
-      const isLoggedIn = !!cookies.token;
+      const isLoggedIn = !cookies.token;
 
   // If the user logged in, redirect them to dashboard
   if (isLoggedIn) {
     return <Navigate to="/dashboard" />;
   }
+ 
 
   return element;
 };

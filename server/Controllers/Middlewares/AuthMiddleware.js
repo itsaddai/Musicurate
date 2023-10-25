@@ -1,4 +1,4 @@
-const User = require("../models/SignupModels");
+const User = require("../../models/SignupModels");
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
 
@@ -9,6 +9,16 @@ module.exports.userVerification = (req, res) => {
     console.log("No token found in cookies");
     return res.json({ status: false });
   }
+
+module.exports.savePassword = async (req, res) => {
+    const token = req.cookies.token;
+    const { password } = req.body;
+    const { user } = req.body;
+    user.password = password;
+    await user.save();
+    res.json({ status: true, message: 'Password saved successfully' });
+    }
+  
 
   jwt.verify(token, `{process.env.TOKEN_KEY}`, async (err, data) => {
     if (err) {

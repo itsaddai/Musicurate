@@ -17,7 +17,7 @@ Musicurate uses modern web technologies to deliver a seamless music discovery ex
 - **Frontend**: React, Redux, Axios
 - **Backend**: Node.js, Express.js, MongoDB
 - **Authentication**: JSON Web Tokens (JWT)
-- **Spotify API**: Integrate with the Spotify API for track information and playlist creation.
+- ** API**: Integrate with the Spotify API for track information and playlist creation.
 
 ## Getting Started
 

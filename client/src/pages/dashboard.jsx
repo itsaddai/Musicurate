@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import { Link } from 'react-router-dom';
 import axios from "axios";
+import React from "react";
 import { ToastContainer, toast } from "react-toastify";
 import './dashboard.css'
+
+
 
 const Home = () => {
   const navigate = useNavigate();
@@ -25,15 +29,20 @@ const Home = () => {
       
       const { status, user } = data;
       setFirstName(user);
-      return status
-        ? toast(`Hello ${user}`, {
-            position: "top-right",
-          })
-        : (removeCookie("token"), navigate("/login"));
+      if(status){
+        
+      }
+      else{
+        removeCookie("token");
+        navigate("/login");
+      }
     };
     verifyCookie();
   }, [cookies, navigate, removeCookie]);
   const Logout = () => {
+    toast.success(`Goodbye ${firstName}`, {
+      position: "top-right",
+    })
     removeCookie("token");
     navigate("/");
     
@@ -45,7 +54,9 @@ const Home = () => {
           {" "}
           Welcome <span>{firstName}</span>
         </h4>
-        <button className="search" onClick={() => navigate("/search")}>SEARCH</button>
+        <Link to="/create">
+  <button className="spot">Manage Passwords</button>
+</Link>
         <button className="logout" onClick={Logout}>LOGOUT</button>
       </div>
       <ToastContainer />

@@ -1,8 +1,6 @@
-
 import { useState } from "react";
 import { Button, TextField } from "@mui/material";
 import { Link, useNavigate } from 'react-router-dom';
-import './register.css';
 import axios from 'axios';
 import React from 'react';
 import { toast } from 'react-toastify';
