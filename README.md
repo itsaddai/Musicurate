@@ -1,38 +1,19 @@
-# Musicurate - Tag-Based Music Discovery
+# Passgen - Secure Password Generator
 
-Musicurate is a web application that lets music enthusiasts discover new songs and playlists on Spotify using user-generated tags. Explore a world of music through tags created by the community, and find the perfect soundtrack for every moment.
+CipherCraft is a full-stack web application designed to help you enhance your online security by generating strong and unique passwords. Built on the robust MERN (MongoDB, Express, React, Node.js) stack and fortified with user authentication, CipherCraft empowers you to create and manage unbreakable passwords, ensuring the safety of your digital accounts.
 
 ## Features
 
-- **Tag-Based Search**: Discover music based on user-generated tags.
-- **Playlist Creation**: Build playlists directly from your search results.
-- **User Authentication**: Secure user registration and login system to personalize your music discovery experience.
-- **User Profile**: Customize your profile and see your saved tracks and playlists.
+- **Password Generation**: Create strong and complex passwords with ease.
+- **User Authentication**: Secure user registration and login system to personalize your password management experience.
+- **Password Storage**: Save and organize your generated passwords for easy access.
 
 ## Tech Stack
 
-Musicurate uses modern web technologies to deliver a seamless music discovery experience.
+CipherCraft leverages modern web technologies to provide a seamless and secure password generation experience.
 
-- **Frontend**: React, Redux, Axios
+- **Frontend**: React, Axios
 - **Backend**: Node.js, Express.js, MongoDB
-- **Authentication**: JSON Web Tokens (JWT)
-- ** API**: Integrate with the Spotify API for track information and playlist creation.
+- **Authentication**: JSON Web Tokens (JWT), Bcrypt
+- **External API**: Integration with various password strength analysis tools for enhanced security.
 
-## Getting Started
-
-Follow these steps to set up a local instance of Musicurate:
-
-1. **Clone the Repository**:
-
-   ```
-   git clone https://github.com/your-username/musicurate.git
-   cd musicurate
-
-2. **Install Dependencies**:
-   ```
-   cd client
-   npm i
-   cd ../server
-   npm i
-
-   
