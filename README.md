@@ -1,6 +1,6 @@
 # Passgen - Secure Password Generator
 
-CipherCraft is a full-stack web application designed to help you enhance your online security by generating strong and unique passwords. Built on the robust MERN (MongoDB, Express, React, Node.js) stack and fortified with user authentication, CipherCraft empowers you to create and manage unbreakable passwords, ensuring the safety of your digital accounts.
+Passgen is a full-stack web application designed to help you enhance your online security by generating strong and unique passwords. Built on the robust MERN (MongoDB, Express, React, Node.js) stack and fortified with user authentication, Passgen empowers you to create and manage unbreakable passwords, ensuring the safety of your digital accounts.
 
 ## Features
 
@@ -10,7 +10,7 @@ CipherCraft is a full-stack web application designed to help you enhance your on
 
 ## Tech Stack
 
-CipherCraft leverages modern web technologies to provide a seamless and secure password generation experience.
+Passgen leverages modern web technologies to provide a seamless and secure password generation experience.
 
 - **Frontend**: React, Axios
 - **Backend**: Node.js, Express.js, MongoDB
