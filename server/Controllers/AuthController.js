@@ -1,6 +1,23 @@
-const User = require("../models/SignupModels");
+const { User, Pass} = require ("../models/SignupModels")
 const { createSecretToken } = require("../util/SecretToken");
 const bcrypt = require("bcryptjs");
+
+const savePasswords = async (req, res) => {
+  const { userID, password, passName} = req.body;
+  try {
+    const user = await User.findById(userID);
+    if(!user){
+      return res.json({message:'User not found'})
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    user.savedPasswords.push({name: passName, password: hashedPassword});
+    await user.save();
+  }
+  catch(error){
+    console.error(error);
+  }
+}
 
 
 const register = async (req, res) => {
@@ -37,7 +54,7 @@ const register = async (req, res) => {
 };
 
 module.exports = {
-  register,
+  register, savePasswords
 };
 
 module.exports.Login = async (req, res, next) => {

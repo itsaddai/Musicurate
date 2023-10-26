@@ -3,11 +3,8 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import "./create.css";
 import { Link } from "react-router-dom";
-const baseUrl = 'http://localhost:4000'; 
-const endpoint = '/save-password'; 
+import axios from 'axios';
 
-
-const url = baseUrl + endpoint;
 
 
 const Create = () => {
@@ -21,6 +18,14 @@ const Create = () => {
     const initialPassword = generatePassword(passwordLength);
     setPassword(initialPassword);
   }, [passwordLength]);
+
+  useEffect(() => {
+    const savedPasswords = JSON.parse(localStorage.getItem('savedPasswords'));
+    if (savedPasswords) {
+      setSavedPasswords(savedPasswords);
+    }
+  }, []);
+
 
   const generatePassword = (length) => {
     const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*";
@@ -51,17 +56,38 @@ const Create = () => {
     setPasswordLength(e.target.value);
   };
 
-  const handleSavePassword = () => {
-    if (passwordName) {
-      const savedPassword = { name: passwordName, value: password };
-      setSavedPasswords([...savedPasswords, savedPassword]);
-      setPasswordName(""); 
-    }
-    else{
-      toast.error("Password name required!");
-    }
-  };
 
+
+//post request to database
+const handleSavePassword = () => {
+  if (passwordName) {
+    const savedPassword = { name: passwordName, value: password };
+    
+    // make a POST request to server endpoint
+    axios.post('http://localhost:4000/save-password', {
+      userId: 'userId', 
+      password: savedPassword.value,
+      passName: savedPassword.name
+    })
+    .then((response) => {
+      // Handle the response if needed
+      console.log('Password saved successfully');
+      // You can also fetch the updated list of saved passwords from the server here
+    })
+    .catch((error) => {
+      console.error('Error saving password:', error);
+    });
+
+    // update passwords
+    const updatedPasswords = [...savedPasswords, savedPassword];
+    setSavedPasswords(updatedPasswords)
+    localStorage.setItem('savedPasswords', JSON.stringify(updatedPasswords));
+    
+  } else {
+    toast.error('Password name required!');
+  }}
+  
+  
   const handleRemovePassword = (index) => {
     const updatedPasswords = savedPasswords.filter((_, i) => i !== index);
     setSavedPasswords(updatedPasswords);

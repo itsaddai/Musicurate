@@ -45,4 +45,4 @@ const passSchema = new mongoose.Schema({
 );
 const User = mongoose.model('register', signupSchema);
 const Pass = mongoose.model('password', passSchema);
-module.exports = { User, Pass };
+module.exports = {User, Pass};

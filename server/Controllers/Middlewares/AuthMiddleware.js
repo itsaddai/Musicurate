@@ -1,4 +1,4 @@
-const User = require("../../models/SignupModels");
+const { User, Pass } = require("../../models/SignupModels")
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
 
@@ -28,7 +28,7 @@ module.exports.savePassword = async (req, res) => {
       console.log("Token verified successfully");
       console.log("User ID from token:", data.user);
 
-      const user = await User.findById(data.user);
+   const user = await User.findById(data.user);
       if (user) {
         console.log("User found in the database:", user);
         return res.json({ status: true, user: user.firstName });
