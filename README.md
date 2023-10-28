@@ -17,3 +17,18 @@ Passgen leverages modern web technologies to provide a seamless and secure passw
 - **Authentication**: JSON Web Tokens (JWT), Bcrypt
 - **External API**: Integration with various password strength analysis tools for enhanced security.
 
+  ## Running on a local server
+
+```Command Prompt
+git clone https://github.com/itsaddai/Passgen.git
+npm install
+```
+**Start the server**
+```
+npm start
+```
+**Start the client**
+```
+cd ..
+cd client
+npm start
