@@ -1,6 +1,6 @@
 # Passgen - Secure Password Generator
 
-Passgen is a full-stack web application designed to help you enhance your online security by generating strong and unique passwords. Built on the robust MERN (MongoDB, Express, React, Node.js) stack and fortified with user authentication, Passgen empowers you to create and manage unbreakable passwords, ensuring the safety of your digital accounts.
+Passgen is a full-stack web application designed to users enhance online security by generating strong and unique passwords. Built on the MERN (MongoDB, Express, React, Node.js) stack and fortified with user authentication, Passgen allows you to create and manage strong strong, ensuring the safety of your digital accounts.
 
 ## Features
 
@@ -10,7 +10,7 @@ Passgen is a full-stack web application designed to help you enhance your online
 
 ## Tech Stack
 
-Passgen leverages modern web technologies to provide a seamless and secure password generation experience.
+Passgen leverages modern web technologies to provide a seamless and secure password-generation experience.
 
 - **Frontend**: React, Axios
 - **Backend**: Node.js, Express.js, MongoDB
